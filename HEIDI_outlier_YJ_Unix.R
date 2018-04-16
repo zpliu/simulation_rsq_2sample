@@ -1,4 +1,5 @@
-# library(ggplot2)
+# NOTE: this was edited from GSMR original script to
+#  just keep the pleiotropic SNPs
 library(foreach)
 library(doMC)
 
