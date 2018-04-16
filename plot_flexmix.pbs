@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=10
+#PBS -l mem=10gb
+#PBS -l walltime=00:20:00
+#PBS -m abe
+#PBS -N flexmix
+
+cd /home/zpliu/projectIP/simulation_YJ_2sample
+
+time Rscript plot_flexmix_unix.R
+

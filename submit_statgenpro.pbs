@@ -1,0 +1,53 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=90gb
+#PBS -l walltime=20:00:00
+#PBS -m abe
+#PBS -N XYref_statgenpro
+
+cd /home/zpliu/projectIP/simulation_YJ_2sample
+
+min_maf=0.01
+max_maf=0.5
+snp_num=500
+sample_X=50000
+sample_Y=20000
+sample_ref=5000
+sim_num=1000
+
+thread=12
+
+betaList="1.0"
+rsq_GX_list="0.4"
+rsq_PG_list="0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1"
+# rsq_PG_list="0.1"
+rsq_XY_list="0.05"
+rsq_C_list="0.2"
+
+pleio_ratio_list="0.1"
+
+for beta in $betaList
+do
+	for rsq_GX in $rsq_GX_list
+	do
+		for rsq_PG in $rsq_PG_list
+		do
+			for rsq_XY in $rsq_XY_list
+			do
+				for rsq_C in $rsq_C_list
+				do
+					for pleio_ratio in $pleio_ratio_list
+					do
+						simDIR="beta${beta}_maf${min_maf}${max_maf}_snp${snp_num}_sizeX${sample_X}Y${sample_Y}Ref${sample_ref}_sim${sim_num}_pleio${pleio_ratio}_rsqGX${rsq_GX}_rsqPG${rsq_PG}_rsqXY${rsq_XY}_rsqC${rsq_C}"
+						if [ ! -d $simDIR ]; then 
+							time bash run_sim_Rsq_noMix.sh $beta $min_maf $max_maf $snp_num $sample_X $sample_Y $sample_ref $sim_num $pleio_ratio $rsq_GX $rsq_PG $rsq_XY $rsq_C $thread
+						fi
+
+						# echo "Compressing files "
+						# bash compress_file.sh $simDIR
+					done
+				done
+			done
+		done
+	done
+done
