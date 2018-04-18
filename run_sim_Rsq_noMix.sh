@@ -87,10 +87,10 @@ export -f TwoSampleMR
 ## Main function
 ##--------------------------------
 simDIR="beta${beta}_maf${min_maf}${max_maf}_snp${snp_num}_sizeX${sample_X}Y${sample_Y}Ref${sample_ref}_sim${sim_num}_pleio${pleio_ratio}_rsqGX${rsq_GX}_rsqPG${rsq_PG}_rsqXY${rsq_XY}_rsqC${rsq_C}"
-make_directory $simDIR
-echo "simulation"
-time simulate $simDIR
-# echo "MR"
-# time TwoSampleMR $simDIR
+# make_directory $simDIR
+# echo "simulation"
+# time simulate $simDIR
+echo "MR"
+time TwoSampleMR $simDIR
 
 
